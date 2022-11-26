@@ -3,17 +3,18 @@ const express = require('express')
 const app = express()
 const PORT = 3000
 const reactViews = require('express-react-views')
-//const mongoose = require('mongoose')
+const mongoose = require('mongoose')
 const methodOverRide = require("method-override")
+const Captain = require('./models/logs')
 
 //================== Connection to Database ===================
-// mongoose.connect(process.env.MONGO_URI, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-// })
-// mongoose.connection.once('open',()=>{
-//     console.log('Connected to Mongo')
-// })
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+mongoose.connection.once('open',()=>{
+    console.log('Connected to Mongo')
+})
 //================== SetUp Engine =============================
 app.set('view engine' , 'jsx')
 app.engine('jsx', reactViews.createEngine())
