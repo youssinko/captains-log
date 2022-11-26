@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const captainSchema = new mongoose.Schema(
+const logSchema = new mongoose.Schema(
     {
         title: {type: String , required: true},
         entry:{ type: String , required:true},
@@ -9,5 +9,5 @@ const captainSchema = new mongoose.Schema(
         timestamps: true
     }
 )
-const Captain = mongoose.model('captain', captainSchema)
-module.exports = Captain
+const Log = mongoose.model('log', logSchema)
+module.exports = Log

@@ -5,7 +5,7 @@ const PORT = 3000
 const reactViews = require('express-react-views')
 const mongoose = require('mongoose')
 const methodOverRide = require("method-override")
-const Captain = require('./models/logs')
+const Log = require('./models/logs')
 
 //================== Connection to Database ===================
 mongoose.connect(process.env.MONGO_URI, {
@@ -27,23 +27,42 @@ app.use((req,res,next)=>{
 app.use(express.urlencoded({extended:false}))
 app.use(methodOverRide('_method'))
 
+//=============== Index =========
+app.get('/logs', (req,res)=>{
+    Log.find({}, (error, allLogs)=>{
+        if(!error){
+            res.status(200).render('Index',{
+                logs: allLogs
+            })
+        }else{
+            res.status(400),send(error)
+        }
+    })
+})
+
 //=============== NEW =============
-app.get('/captain/new',(req,res)=>{
+app.get('/logs/new',(req,res)=>{
    res.render('New')
 })
 
 //============== CREATE ===========
- app.post('/',(req,res)=>{
+ app.post('/logs',(req,res)=>{
     if(req.body.shipIsBroken === 'on'){
         req.body.shipIsBroken = true
     }else{
         req.body.shipIsBroken = false
     }
-    Captain.create(req.body, (error , createdShip)=>{
+    Log.create(req.body, (error , createdlog)=>{
         if(!error){
-            res.status(200).redirect('/captain')
+            res.status(200).redirect('/logs')
         }else{
             res.status(400).send(error)
         }
     })
  })
+
+
+ //========== listening to port ==========
+ app.listen(PORT, () => {
+    console.log(`Listening on port: ${PORT}`)
+  }) 
