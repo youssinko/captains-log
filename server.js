@@ -30,3 +30,19 @@ app.use(methodOverRide('_method'))
 app.get('/captain/new',(req,res)=>{
    res.render('New')
 })
+
+//============== CREATE ===========
+ app.post('/',(req,res)=>{
+    if(req.body.shipIsBroken === 'on'){
+        req.body.shipIsBroken = true
+    }else{
+        req.body.shipIsBroken = false
+    }
+    Captain.create(req.body, (error , createdShip)=>{
+        if(!error){
+            res.status(200).redirect('/captain')
+        }else{
+            res.status(400).send(error)
+        }
+    })
+ })
