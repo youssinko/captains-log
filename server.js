@@ -60,7 +60,16 @@ app.get('/logs/new',(req,res)=>{
         }
     })
  })
-
+//============ Show ==============
+app.get('/:id' ,(req ,res)=>{
+    Log.findById(req.params.id , (error , foundLog)=>{
+        if(!error){
+            res.status(200).render('Show',{log: foundLog})
+        }else{
+            res.status(400).send(error)
+        }
+    })
+})
 
  //========== listening to port ==========
  app.listen(PORT, () => {

@@ -5,6 +5,9 @@ class New extends React.Component{
     render(){
         return (
             <div>
+                <h1>
+                    <a href="/logs">Back to Home Page</a>
+                </h1>
                 <form action="/logs" method='POST'>
                    Title: <input type="text" name="title"/> <br />
                    Entry: <input type="textarea" name="entry"/> <br />
