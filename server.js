@@ -4,8 +4,8 @@ const app = express()
 const PORT = 3000
 const reactViews = require('express-react-views')
 const mongoose = require('mongoose')
-const methodOverRide = require("method-override")
 const Log = require('./models/logs')
+const methodOverRide = require('method-override')
 
 //================== Connection to Database ===================
 mongoose.connect(process.env.MONGO_URI, {
@@ -44,6 +44,12 @@ app.get('/logs', (req,res)=>{
 app.get('/logs/new',(req,res)=>{
    res.render('New')
 })
+//=============== DELETE ==============
+app.delete('/logs/:id', (req,res)=>{
+    Log.findByIdAndDelete(req.params.id , (err,data)=>{
+        res.redirect('/logs')
+    })
+})
 
 //============== CREATE ===========
  app.post('/logs',(req,res)=>{
@@ -61,7 +67,7 @@ app.get('/logs/new',(req,res)=>{
     })
  })
 //============ Show ==============
-app.get('/:id' ,(req ,res)=>{
+app.get('/logs/:id' ,(req ,res)=>{
     Log.findById(req.params.id , (error , foundLog)=>{
         if(!error){
             res.status(200).render('Show',{log: foundLog})
