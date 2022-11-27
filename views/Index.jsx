@@ -1,18 +1,21 @@
-const React = require('react')
+const React = require('react');
+const DefaultLayOut = require('./layout/Default');
+
+
 class Index extends React.Component{
     render(){
         const { logs } = this.props
         return(
-            <div>
+            <DefaultLayOut title="Captain's Log">
             <h1>Captain's Log</h1>
             <nav>
-                <a href="/logs/new">Create a New Log</a>
+                <a href="/logs/new" style={{color: 'pink'}}>Create a New Log</a>
             </nav>
             <ul>
                 {logs.map((log,i)=>{
                     return(
                         <li key='log'>
-                            <a href={`/logs/${log._id}`}>{log.title}</a>
+                            <a href={`/logs/${log._id}`} style={{color: 'pink'}}>{log.title}</a>
                             <form action={`/logs/${log._id}/edit`}method="PUT">
                                 <input type="submit" value="Edit" />
                             </form>
@@ -23,7 +26,7 @@ class Index extends React.Component{
                     )
                 })}
             </ul>
-            </div>
+            </DefaultLayOut>
         )
     }
 }

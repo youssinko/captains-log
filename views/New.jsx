@@ -1,12 +1,12 @@
 const React = require('react')
-
+const DefaultLayOut = require('./layout/Default');
 class New extends React.Component{
 
     render(){
         return (
-            <div key='logs'>
+            <DefaultLayOut key='logs'>
                 
-                    <a href="/logs">Home Page</a>
+                    <a href="/logs" style={{color: 'pink'}}>Home Page</a>
                
                 <form action="/logs" method='POST'>
                    Title: <input type="text" name="title"/> <br />
@@ -16,7 +16,7 @@ class New extends React.Component{
 
 
                 </form>
-            </div>
+            </DefaultLayOut>
         )
     }
 }
